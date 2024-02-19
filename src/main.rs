@@ -1,8 +1,5 @@
 // use is how we import various lib, such as std.io
-use std::io;
-use std::cmp::Ordering;
-use std::thread::sleep;
-use std::time::Duration;
+use std::{ io, cmp::Ordering, thread::sleep, time::Duration };
 // rand overs various RNG features
 use rand::Rng;
 fn main() {
