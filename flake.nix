@@ -10,7 +10,7 @@
   in {
     packages.x86_64-linux = rec {
       default = package;
-      package = import ./package.nix {inherit pkgs;};
+      package = pkgs.callPackage ./package.nix {};
     };
     devShells.x86_64-linux.default = import ./shell.nix {inherit pkgs;};
   };

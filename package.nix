@@ -1,9 +1,9 @@
-{pkgs ? import <nixpkgs> {}}:
-pkgs.rustPlatform.buildRustPackage {
+{rustPlatform, lib }:
+rustPlatform.buildRustPackage {
   pname = "hello_world";
   version = "0.1.0";
   cargoLock.lockFile = ./Cargo.lock;
-  src = pkgs.lib.cleanSource ./.;
+  src = lib.cleanSource ./.;
   buildInputs = [];
   nativeBuildInputs = [];
   #  doCheck = false;
