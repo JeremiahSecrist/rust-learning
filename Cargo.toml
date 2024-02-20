@@ -1,5 +1,5 @@
 [package]
-name = "hello_world"
+name = "app"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,3 +9,4 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "4.5.1", features = ["derive"] }
+shunting = "0.1.2"
