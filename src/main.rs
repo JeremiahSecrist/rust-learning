@@ -1,29 +1,63 @@
-// use is how we import various lib, such as std.io
-use std::{ io, cmp::Ordering, thread::sleep, time::Duration };
-// rand overs various RNG features
-use rand::Rng;
+use clap::{Parser, ValueEnum};
+
+/// Simple program to greet a person
+#[derive(Parser)]
+#[command(version, about, long_about = None)]
+struct Args {
+    
+
+    /// Type of operation to perform
+    #[arg(value_enum)]
+    mode: Mode,
+
+    /// Name of the person to greet
+    // #[arg(short, long)] 
+    value: String,
+
+    // /// Number of times to greet
+    // #[arg(short, long, default_value_t = 1)]
+    // count: u8,
+}
+
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, ValueEnum)]
+enum Mode {
+    A,
+    S,
+    M,
+    D,
+}
+
 fn main() {
-    // In rust we must declare the type(string) and mutability if we plan to modify 
-    let secret_number: u32 = rand::thread_rng().gen_range(1..10);
-    loop {
-        println!("Please guess a number:");
-        let mut guess: String = String::new();
-        io::stdin()
-            .read_line(&mut guess)
-            .expect("Failed to read line.");
-        print!("\x1B[2J\x1B[1;1H");;
-        let guess_int: u32 = guess.trim().parse().expect("Please type a number!");
-        // println!("You guessed: {}", guess);
-        // println!("The number should have been: {}", secret_number);
-        match guess_int.cmp(&secret_number) {
-            Ordering::Less => print!("Too small\n"),
-            Ordering::Greater => print!("Too big\n"),
-            Ordering::Equal => {
-                print!("Congrats you got it!\n");
-                sleep(Duration::from_millis(500));
-                print!("\x1B[2J\x1B[1;1H");
-                break;
-            },
-        };
+    let args = Args::parse();
+    let input = args.value;
+    let mut iter = input.split_whitespace();
+    
+    // Parse the first integer
+    let num1: i32 = iter.next().unwrap().parse().unwrap();
+
+    // Parse the second integer
+    let num2: i32 = iter.next().unwrap().parse().unwrap();
+
+    if iter.next().is_some() {
+        panic!("Input contains more than two numbers");
+    }
+
+    match args.mode {
+        Mode::A => {
+            let answer = &num1 + &num2;
+            println!("{num1} + {num2} = {answer}");
+        }
+        Mode::S => {
+            let answer = &num1 - &num2;
+            println!("{num1} - {num2} = {answer}");
+        }
+        Mode::M => {
+            let answer = &num1 * &num2;
+            println!("{num1} x {num2} = {answer}");
+        }
+        Mode::D => {
+            let answer = &num1 / &num2;
+            println!("{num1} % {num2} = {answer}");
+        }
     }
 }
