@@ -14,9 +14,10 @@ struct Args {
 fn main() {
     let args = Args::parse();
     let input = args.value;
-    let expr = ShuntingParser::parse_str(&input).unwrap();
-    let result = MathContext::new().eval(&expr).unwrap();
-    let padded_result: String =  format!("AAAAAAAAA{}", result.clone().to_string());
-    let hash = Hash::new(&padded_result, padded_result.as_str(), "argon2i").expect("Failed to create hash");
-    println!("{} {} = {}", STANDARD.encode(&hash.hash), &input, result);
+    let expr = ShuntingParser::parse_str(&input)
+        .expect("Failed to shunt value");
+    let result = MathContext::new()
+        .eval(&expr)
+        .expect("Failed to calculate shunted value");
+    println!("{} = {}", &input, result);
 }
