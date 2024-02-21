@@ -8,5 +8,13 @@ edition = "2021"
 #rustflags = ["-Clink-arg=-fuse-ld=lld"]
 
 [dependencies]
+base64 = "0.21.7"
 clap = { version = "4.5.1", features = ["derive"] }
+hsh = "0.0.7"
 shunting = "0.1.2"
+
+[profile.release]
+strip = true  # Automatically strip symbols from the binary.
+opt-level = "s"  # Optimize for size.
+lto = true
+codegen-units = 1

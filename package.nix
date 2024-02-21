@@ -6,11 +6,12 @@
  makeWrapper
  }:
 
-rustPlatform.buildRustPackage {
-  pname = "hello_world";
+rustPlatform.buildRustPackage rec {
+  pname = "app";
   version = "0.1.0";
   cargoLock.lockFile = ./Cargo.lock;
   src = lib.cleanSource ./.;
+  cargoBuildCommand = "cargo build --release --package ${pname}";
   nativeBuildInputs = [
     cmake
     pkg-config

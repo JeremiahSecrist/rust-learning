@@ -1,6 +1,9 @@
-use clap::{Parser, ValueEnum};
+use clap::Parser;
 use shunting::*;
-/// Simple program to greet a person
+use hsh::models::hash::Hash;
+use base64::{engine::general_purpose::STANDARD, Engine as _};
+
+/// Simple program to solve equations
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -13,5 +16,7 @@ fn main() {
     let input = args.value;
     let expr = ShuntingParser::parse_str(&input).unwrap();
     let result = MathContext::new().eval(&expr).unwrap();
-    println!("{} = {}", &input, result);
+    let padded_result: String =  format!("AAAAAAAAA{}", result.clone().to_string());
+    let hash = Hash::new(&padded_result, padded_result.as_str(), "argon2i").expect("Failed to create hash");
+    println!("{} {} = {}", STANDARD.encode(&hash.hash), &input, result);
 }
