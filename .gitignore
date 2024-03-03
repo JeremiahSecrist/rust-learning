@@ -2,4 +2,5 @@
 /result
 /target
 /testdata
+.qcow2
 .direnv
