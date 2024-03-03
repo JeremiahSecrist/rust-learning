@@ -3,6 +3,9 @@
  fontconfig,
  cmake,
  pkg-config,
+ llvmPackages,
+ clang,
+ openssl,
  makeWrapper
  }:
 
@@ -15,12 +18,16 @@ rustPlatform.buildRustPackage rec {
   nativeBuildInputs = [
     cmake
     pkg-config
-    makeWrapper
+    rustPlatform.bindgenHook
   ];
-  
   CARGO_INCREMENTAL = "0";
+  RUST_BACKTRACE=1;
+  LIBCLANG_PATH="${llvmPackages.libclang.lib}/lib";
+
   buildInputs = [
     fontconfig
+    clang
+    openssl
   ];
 
   #  doCheck = false;

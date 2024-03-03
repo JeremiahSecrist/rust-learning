@@ -19,7 +19,8 @@ pkgs.mkShell {
   inputsFrom = [(pkgs.callPackage ./package.nix {})];
   RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
   # Additional tooling
-  LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeLibs}";
+  # LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath runtimeLibs}";
+  LIBCLANG_PATH="${pkgs.llvmPackages.libclang.lib}/lib";
   buildInputs = with pkgs; [
     cargo
     cargo-watch
@@ -29,6 +30,12 @@ pkgs.mkShell {
     rust-analyzer
     pkg-config
     bacon
+    clang
+    openssl
     # nodePackages_latest.pnpm
   ];
+  # netiveBuildInputs = with pkgs; [
+  #   pkgconfig
+  #   rustPlatform.bindgenHook
+  # ];
 }
