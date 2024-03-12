@@ -8,19 +8,19 @@ edition = "2021"
 #rustflags = ["-Clink-arg=-fuse-ld=lld"]
 
 [dependencies]
-base64 = "0.21.7"
+# base64 = "0.21.7"
 clap = { version = "4.5.1", features = ["derive"] }
-hex = "0.4.3"
-hsh = "0.0.7"
-kyber = "0.1.0"
-oqs = "0.9.0"
-pqcrypto = "0.17.0"
-pqcrypto-kyber = "0.8.1"
-rand = "0.8.5"
-serde = "1.0.197"
-serde_bytes = "0.11.14"
-serde_json = "1.0.114"
-shunting = "0.1.2"
+# hex = "0.4.3"
+# hsh = "0.0.7"
+# kyber = "0.1.0"
+# oqs = "0.9.0"
+# pqcrypto = "0.17.0"
+# pqcrypto-kyber = "0.8.1"
+# rand = "0.8.5"
+# serde = "1.0.197"
+# serde_bytes = "0.11.14"
+# serde_json = "1.0.114"
+# shunting = "0.1.2"
 
 [profile.release]
 strip = true  # Automatically strip symbols from the binary.
