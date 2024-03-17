@@ -1,7 +1,7 @@
 use clap::{Arg, ArgAction, Command};
 /// Needs to be declared that it is of type clap::command 
 /// enables gettings matches on the other side 
-pub fn build_matches() -> clap::Command {
+pub fn build_matches() -> clap::ArgMatches {
 Command::new("pacman")
     .about("package manager utility")
     .version("5.2.1")
@@ -63,5 +63,5 @@ Command::new("pacman")
                     .action(ArgAction::Set)
                     .num_args(1..),
             ),
-    )
+    ).get_matches()
 }
