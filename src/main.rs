@@ -1,7 +1,7 @@
 mod args;
 use args::build_matches;
 fn main() {
-    let matches = build_matches().get_matches();
+    let matches = build_matches().get_matches(); /// easier to get matches on the other side
 
     match matches.subcommand() {
         Some(("sync", sync_matches)) => {
